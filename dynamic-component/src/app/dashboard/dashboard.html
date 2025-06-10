@@ -1,0 +1,6 @@
+<!-- dashboard.component.html -->
+<div class="row" style="display: flex;">
+  <div *ngFor="let column of layout.columns; let colIndex = index" class="col" style="flex: 1; margin: 5px; border: 1px solid #ccc; padding: 10px;">
+    <ng-template appDynamicWidget #container></ng-template>
+  </div>
+</div>
