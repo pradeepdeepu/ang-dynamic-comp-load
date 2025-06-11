@@ -1,14 +1,10 @@
 // dashboard.component.ts
 import {
-  AfterViewInit,
-  Component,
-  QueryList,
-  ViewChildren
+  Component
 } from '@angular/core';
 
-import { DynamicWidgetDirective } from '../dynamic-widget.directive';
-import { widgetRegistry } from '../widget-registry';
 import { CommonModule } from '@angular/common';
+import { DynamicWidgetDirective } from '../dynamic-widget.directive';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,30 +12,54 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [DynamicWidgetDirective, CommonModule]
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent {
+  
   layout = {
-    columns: [
-      { widgets: ['WeatherWidget'] },
-      { widgets: ['NewsWidget', 'WeatherWidget', 'WeatherWidget'] }
+    rows: [
+      {
+        columns: [
+          {
+            widgets: [
+              { type: 'component', name: 'WeatherWidget' },
+              { type: 'html', html: '<div style="color:green;">☘️ Hello from backend!</div>' }
+            ]
+          },
+          {
+            widgets: [
+              { type: 'component', name: 'NewsWidget' }
+            ]
+          }
+        ]
+      },
+      {
+        columns: [
+          {
+            widgets: [
+              { type: 'html', html: '<h3>🧠 Second row, first column</h3>' }
+            ]
+          }
+        ]
+      }
     ]
   };
 
-  @ViewChildren(DynamicWidgetDirective)
-  dynamicHosts!: QueryList<DynamicWidgetDirective>;
 
-  ngAfterViewInit() {
-    this.dynamicHosts.forEach((host, columnIndex) => {
-      const container = host.viewContainerRef;
-      container.clear();
+  // @ViewChildren(DynamicWidgetDirective)
+  // dynamicHosts!: QueryList<DynamicWidgetDirective>;
 
-      const widgets = this.layout.columns[columnIndex].widgets;
+  // ngAfterViewInit() {
+  //   this.dynamicHosts.forEach((host, columnIndex) => {
+  //     const container = host.viewContainerRef;
+  //     container.clear();
 
-      for (const widgetName of widgets) {
-        const comp = widgetRegistry[widgetName];
-        if (comp) {
-          container.createComponent(comp);
-        }
-      }
-    });
-  }
+  //     const widgets = this.layout.columns[columnIndex].widgets;
+
+  //     for (const widgetName of widgets) {
+  //       const comp = widgetRegistry[widgetName];
+  //       if (comp) {
+  //         container.createComponent(comp);
+  //       }
+  //     }
+  //   });
+  // }
 }

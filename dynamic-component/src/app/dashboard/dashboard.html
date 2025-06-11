@@ -1,6 +1,23 @@
-<!-- dashboard.component.html -->
+<!-- dashboard.component.html
 <div class="row" style="display: flex;">
   <div *ngFor="let column of layout.columns; let colIndex = index" class="col" style="flex: 1; margin: 5px; border: 1px solid #ccc; padding: 10px;">
     <ng-template appDynamicWidget #container></ng-template>
+  </div>
+</div> -->
+
+
+<!-- dashboard.component.html -->
+<div class="dashboard">
+  <div class="row" *ngFor="let row of layout.rows" style="display: flex; margin-bottom: 10px;">
+    <div
+      class="column"
+      *ngFor="let col of row.columns"
+      style="flex: 1; margin-right: 10px; border: 1px solid #ccc; padding: 10px;"
+    >
+      <ng-container *ngFor="let widget of col.widgets">
+        <ng-template [appDynamicWidget]="widget" *ngIf="widget.type === 'component'"></ng-template>
+        <div *ngIf="widget.type === 'html'" [innerHTML]="widget.html"></div>
+      </ng-container>
+    </div>
   </div>
 </div>
