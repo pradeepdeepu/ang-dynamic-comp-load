@@ -1,0 +1,79 @@
+<div class="Imn-container Imn-p-2">
+
+    <div style="background-color: #Be8eBe; display: flex; place-content: center space-between">
+        <div class="flex-item">
+            <label>what</label>
+            <i aria-hidden="true" class="Imnicon Imnicon-edit Imn-mx-5"></i>
+        </div>
+        <span class="flex-item Imn-font-weight-bold">
+            <i aria-hidden="true" style="color: green;" class="Imnicon Imnicon-triangle"></i>
+        </span>
+    </div>
+
+    <!-- WHAT CALC -->
+    <div class="Imn-font-weight-bold" style="border-bottom:#Be8e8e solid 2px;" th:if="${data['showCalcSection']}">
+        <label class="flex-item">What (calc)</label>
+        <label class="flex-item" th:text="${data['calc']}">2.3</label>
+    </div>
+
+    <!-- FINANCIAL -->
+    <div style="border-bottom:white solid 1px;" th:if="${data['showFinancialSection']}">
+        <div class="Imn-d-flex Imn-flex-column Imn-font-weight-bold">
+
+            <div style="display: flex; place-content: center space-between">
+                <label>Financial</label>
+                <label th:text="${data['financial']}">1</label>
+            </div>
+
+            <div class="Imn-d-flex" style="justify-content: space-between;">
+                <label>Client/Franchise</label>
+                <label th:text="${data['clientFranchise']}">4</label>
+            </div>
+
+            <div class="Imn-d-flex" style="justify-content: space-between;">
+                <label>Risk/Controls</label>
+                <label th:text="${data['riskControls']}">2</label>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RISK -->
+    <div style="border-bottom:#8e8e8e solid 2px;" th:if="${data['showRiskSection']}">
+        <div class="Imn-d-flex Imn-flex-column">
+
+            <div style="display: flex; place-content: center space-between">
+                <label>Risk</label>
+                <label th:text="${data['risk']}"></label>
+            </div>
+
+            <div class="Imn-d-flex" style="justify-content: space-between;">
+                <label>Compliance</label>
+                <label th:text="${data['compliance']}"></label>
+            </div>
+
+            <div class="Imn-d-flex" style="justify-content: space-between;">
+                <label>KYC</label>
+                <label th:text="${data['kyc']}">1</label>
+            </div>
+
+            <div class="Imn-d-flex" style="justify-content: space-between;">
+                <label>Cap Mgmt</label>
+                <label th:text="${data['capMgmt']}"></label>
+            </div>
+
+            <div class="Imn-d-flex" style="justify-content: space-between;">
+                <label>Risk/Cap Mgmt</label>
+                <label th:text="${data['riskCapMgmt']}"></label>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- WHAT 2023 -->
+    <div th:if="${data['showWhat2023Section']}">
+        <label class="flex-item">What (2023)</label>
+        <label class="flex-item" th:text="${data['what2023']}">3</label>
+    </div>
+
+</div>
