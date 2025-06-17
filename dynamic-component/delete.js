@@ -147,3 +147,32 @@ public class HazelcastCacheService implements CacheService {
         map.delete(key);
     }
 }
+
+
+
+@Repository
+public class UserRepository extends CacheableRepository<User, Long> {
+
+    private final UserJpaRepository userJpaRepository;
+
+    @Autowired
+    public UserRepository(CacheService cacheService, UserJpaRepository userJpaRepository) {
+        super(cacheService);
+        this.userJpaRepository = userJpaRepository;
+    }
+
+    @Override
+    protected String buildCacheKey(Long id) {
+        return "user:" + id;
+    }
+
+    @Override
+    protected User fetchFromDb(Long id) {
+        return userJpaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    protected Class<User> getTypeClass() {
+        return User.class;
+    }
+}
